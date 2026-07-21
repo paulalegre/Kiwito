@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bhapw5jehqn24"]
+
+[ext_resource type="Texture2D" uid="uid://ct2n3dpr1i1rr" path="res://design/globo.png" id="1_dilbn"]
+[ext_resource type="Script" uid="uid://cbvq6gja1qkb2" path="res://scripts/globo.gd" id="2_script"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jnqgq"]
+radius = 58.0
+height = 148.0
+
+[node name="Globo" type="Area2D" unique_id=1219339167]
+script = ExtResource("2_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=588846584]
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_dilbn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1983152035]
+position = Vector2(2, -57)
+shape = SubResource("CapsuleShape2D_jnqgq")
