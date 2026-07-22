@@ -1,9 +1,0 @@
-[gd_scene format=3]
-
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_script"]
-
-[node name="Main" type="Node2D" unique_id=73431020]
-script = ExtResource("1_script")
-
-[node name="SpawnTimer" type="Timer" parent="." unique_id=1414114117]
-one_shot = true

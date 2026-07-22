@@ -1,0 +1,74 @@
+schema: spec-driven
+
+# Project context
+# This is shown to AI when creating artifacts.
+context: |
+  Moss Guardian (MossGame) — Godot 4.x 2D educational minigame platform for ages 3-8
+  (Android/iPadOS, validated on PC). The product is the reusable "cartridge" platform,
+  not any single minigame; first cartridge is "Explotaglobos" (color-discrimination
+  balloon-popping game).
+
+  Current state: early bootstrap. scripts/main.gd and scripts/globo.gd are a rough
+  flat prototype predating the target architecture — no core/shared/features split,
+  no autoloads, no GUT tests yet.
+
+  Source of truth (read before proposing related changes, do not re-derive from code):
+    - docs/Propuesta_MVP.md — scope, roadmap phases, risks
+    - docs/GDD_MVP.md — game design, MatchRule engine, progression/stickers, save schema
+    - docs/Core_Architecture.md (v3.0) — normative for all GDScript: scene/node patterns,
+      communication rules, directory topology, autoload contracts
+    - docs/Direccion_de_Arte.md (v1.3) — normative for all visual assets/scenes: palette,
+      shape language, Low-Stim contract
+
+  Binding architecture rules (Core_Architecture.md):
+    - Cartridge contract: minigames extend a thin MinigameBase (Node2D) one level deep;
+      start(config)/pause()/resume()/stop()/session_finished(result); never reference
+      Host or other minigames; composition over inheritance (component nodes).
+    - Communication: "signals up, calls down" — child emits local signal parent connects;
+      parent calls child methods directly; cross-domain results via typed MinigameResult;
+      global fan-out only via typed autoload signals. A global string-based EventBus is
+      explicitly forbidden.
+    - Data-driven: no hardcoded level/balance values — LevelConfig.tres Resources;
+      MatchRule enum (MATCH_ANY, MATCH_COLOR, later MATCH_SHAPE/SIZE/COUNT) evaluated by
+      one generic matches(). .tres is trusted res:// design config only; user save data
+      is always JSON via FileAccess (user://save_data.json), atomic writes + versioned,
+      fallback to defaults — never crash on boot.
+    - GDScript: static typing mandatory; snake_case vars/funcs, PascalCase nodes/classes,
+      SCREAMING_SNAKE_CASE constants; no chained relative node paths — inject via @export.
+    - Directory topology (target): core/autoloads/, core/data/, core/utils/,
+      shared/contracts/, shared/components/, shared/ui_elements/, shared/global_assets/,
+      features/hub_main/, features/minigames/mg_balloons/ (strict isolation — no
+      cross-minigame references). SceneDirector is the only code allowed to change scenes.
+    - Autoload init order: SaveManager → SettingsManager/ProgressionManager →
+      AudioManager/MetricsLogger/SceneDirector. No autoload touches another in _init();
+      cross-autoload wiring happens in _ready().
+    - Input: hitboxes 30% larger than sprite; filter event.index == 0; Emulate Touch
+      From Mouse only (not Emulate Mouse From Touch); each node handles its own touch via
+      its own Area2D, calling set_input_as_handled().
+    - Product/UX invariants: zero text (audio + visual only), zero punishment (no
+      game-over/scoring), escalating non-blocking help, mandatory Low-Stim mode; feedback
+      on any valid touch under 100ms.
+
+  Binding art rules (Direccion_de_Arte.md):
+    - No literal hex colors in scenes/scripts — all color from
+      shared/global_assets/palette.tres.
+    - Soft Vector Flat-Art: no outlines, no gradients (except distant background sky),
+      no internal texture/grain; volume via flat overlapping shapes (max 2 tones);
+      rounded vertices, no sharp/90° angles.
+    - 4 MATCH_COLOR colors are a fixed luminance staircase (ΔL >= 0.12) each with a
+      redundant non-chromatic pattern (stars/stripes/dots/zigzag) — color is never the
+      only channel.
+    - design/globo.png is a stale placeholder (outline/gradient/highlight) marked for
+      rework — not the style target.
+    - Facial prefab (dot eyes #3B3028, no sclera/highlight, simple mouth arc) is default
+      for all characters/stickers.
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+rules:
+  proposal:
+    - Cite which roadmap phase (Propuesta_MVP.md §8) this change advances or which doc
+      section it implements/deviates from.
+    - Flag explicitly if the change touches product/UX invariants (zero text, zero
+      punishment, Low-Stim) or the fixed color/pattern table — these require a
+      documented reason, not just an implementation note.

@@ -11,9 +11,18 @@ config_version=5
 [application]
 
 config/name="MossGame"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://root.tscn"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+SaveManager="*res://core/data/SaveManager.gd"
+SettingsManager="*res://core/autoloads/SettingsManager.gd"
+ProgressionManager="*res://core/autoloads/ProgressionManager.gd"
+AudioManager="*res://core/autoloads/AudioManager.gd"
+MetricsLogger="*res://core/autoloads/MetricsLogger.gd"
+SceneDirector="*res://core/autoloads/SceneDirector.gd"
 
 [display]
 
