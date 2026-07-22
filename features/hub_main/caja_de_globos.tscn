@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://features/hub_main/caja_de_globos.gd" id="1_script"]
+[ext_resource type="Script" path="res://features/hub_main/placeholder_circle.gd" id="2_circle"]
+[ext_resource type="Script" path="res://shared/components/hitbox_component.gd" id="3_hitbox"]
+[ext_resource type="Resource" path="res://shared/global_assets/palette.tres" id="4_palette"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hitbox"]
+radius = 83.2
+
+[node name="CajaDeGlobos" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="PlaceholderCircle" type="Node2D" parent="."]
+script = ExtResource("2_circle")
+palette = ExtResource("4_palette")
+color_id = &"red_coral"
+radius = 64.0
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+script = ExtResource("3_hitbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_hitbox")

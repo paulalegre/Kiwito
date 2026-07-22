@@ -1,3 +1,14 @@
-[gd_scene format=3]
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://features/hub_main/hub_main.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://features/hub_main/caja_de_globos.tscn" id="2_caja"]
+[ext_resource type="PackedScene" path="res://features/hub_main/libro_magico.tscn" id="3_libro"]
 
 [node name="HubMain" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="CajaDeGlobos" parent="." instance=ExtResource("2_caja")]
+position = Vector2(400, 500)
+
+[node name="LibroMagico" parent="." instance=ExtResource("3_libro")]
+position = Vector2(900, 500)

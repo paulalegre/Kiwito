@@ -31,7 +31,8 @@ func launch_minigame(scene: PackedScene, config: LevelConfig) -> void:
 	_active_minigame.session_finished.connect(_on_minigame_session_finished)
 	_active_minigame.start(config)
 
-func _on_minigame_session_finished(_result: MinigameResult) -> void:
+func _on_minigame_session_finished(result: MinigameResult) -> void:
+	ProgressionManager.record_session_result(result)
 	goto_hub()
 
 func _swap_scene(new_scene: Node) -> void:
