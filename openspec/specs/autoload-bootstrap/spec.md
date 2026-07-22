@@ -2,7 +2,14 @@
 
 ## Purpose
 
-TBD - created by archiving change core-foundations-phase1. Update Purpose after archive.
+Establishes the six domain-owning singletons and their fixed dependency order (`SaveManager` →
+`SettingsManager`/`ProgressionManager` → `AudioManager`/`MetricsLogger`/`SceneDirector`) so that persisted
+state (Low-Stim, progression) is always hydrated before anything reads it, and so no autoload ever becomes
+a monolithic `GameState` duplicating another's data (`docs/Core_Architecture.md` §5.1, §6.1). This is the
+seam later phases build real behavior into: Phase 2 fills in `SaveManager`'s atomic I/O and
+`SettingsManager`'s Low-Stim logic, Phase 4 fills in `ProgressionManager`'s milestones, Phase 5 fills in
+`AudioManager`, Phase 6 fills in `MetricsLogger` — without ever needing to renegotiate ownership or init
+order.
 
 ## Requirements
 

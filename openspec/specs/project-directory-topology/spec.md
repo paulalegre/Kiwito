@@ -2,7 +2,12 @@
 
 ## Purpose
 
-TBD - created by archiving change core-foundations-phase1. Update Purpose after archive.
+Defines the feature-sliced `core/`/`shared/`/`features/` folder structure that every later phase's code
+must live inside, and the placement rules that keep it that way (what belongs in `core/` vs `shared/` vs a
+minigame folder). This is what makes the "cartridge" architecture real on disk: without a topology that
+keeps `mg_balloons/` isolated and keeps domain logic out of `shared/`, later minigames and educational
+dimensions would entangle with each other and with Core, defeating the platform's reason for existing
+(`docs/Propuesta_MVP.md` §1, §6).
 
 ## Requirements
 

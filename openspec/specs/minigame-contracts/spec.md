@@ -2,7 +2,12 @@
 
 ## Purpose
 
-TBD - created by archiving change core-foundations-phase1. Update Purpose after archive.
+Defines the thin shared vocabulary — `MinigameBase`, `MinigameResult`, `LevelConfig` — that lets a minigame
+be built and dropped in as an isolated "cartridge" that never references the Host or another minigame,
+communicating only through `start(config)` and the `session_finished(result)` signal
+(`docs/Core_Architecture.md` §3). This is what makes "add a minigame, or a new educational dimension inside
+one, without touching architecture code" possible: `MatchRule` on `LevelConfig` grows by adding enum values
+and `.tres` data (Phase 2+), never by changing `MinigameBase` or `MinigameResult`.
 
 ## Requirements
 

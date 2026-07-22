@@ -2,7 +2,11 @@
 
 ## Purpose
 
-TBD - created by archiving change core-foundations-phase1. Update Purpose after archive.
+Makes `SceneDirector` the only code path allowed to change what's on screen, using a persistent
+container/slot so Core autoloads and any playing music survive a Hub↔minigame transition, and a fade that
+always hides load time. This exists to guarantee the zero-friction, zero-punishment UX invariants a young
+child depends on (`docs/Propuesta_MVP.md` §5): no loading screen, no scene-change jump cut, and no orphaned
+minigame nodes left behind when a session ends and the app returns to the Hub.
 
 ## Requirements
 
