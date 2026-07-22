@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://shared/ui_elements/pause_menu/pause_overlay.gd" id="1_script"]
+[ext_resource type="Script" path="res://shared/ui_elements/pause_menu/tappable_icon.gd" id="2_icon"]
+[ext_resource type="Resource" path="res://shared/global_assets/palette.tres" id="3_palette"]
+
+[node name="PauseOverlay" type="CanvasLayer"]
+layer = 50
+script = ExtResource("1_script")
+
+[node name="HomeButton" type="Control" parent="."]
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+offset_left = 160.0
+offset_top = 160.0
+script = ExtResource("2_icon")
+palette = ExtResource("3_palette")
+color_id = &"warm_grey_tint"
+icon_radius = 40.0
+
+[node name="Overlay" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+mouse_filter = 0
+visible = false
+
+[node name="CenterContainer" type="CenterContainer" parent="Overlay"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Overlay/CenterContainer"]
+mouse_filter = 2
+theme_override_constants/separation = 64
+
+[node name="ContinuarButton" type="Control" parent="Overlay/CenterContainer/HBoxContainer"]
+script = ExtResource("2_icon")
+palette = ExtResource("3_palette")
+color_id = &"green_hoja"
+icon_radius = 48.0
+
+[node name="SalirButton" type="Control" parent="Overlay/CenterContainer/HBoxContainer"]
+script = ExtResource("2_icon")
+palette = ExtResource("3_palette")
+color_id = &"blue_oceano"
+icon_radius = 48.0

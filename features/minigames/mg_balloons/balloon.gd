@@ -13,6 +13,10 @@ const PATTERN_TEXTURES: Dictionary[StringName, Texture2D] = {
 	&"zigzag": preload("res://design/minigames/mg_balloons/pattern_zigzag.png"),
 }
 
+const HIGHLIGHT_BOUNCE_SCALE: float = 1.06
+const HIGHLIGHT_CYCLE_SEC: float = 1.5
+
+@onready var _halo: Node2D = $Halo
 @onready var _body_sprite: Sprite2D = $BodySprite
 @onready var _volume_sprite: Sprite2D = $VolumeSprite
 @onready var _pattern_sprite: Sprite2D = $PatternSprite
@@ -21,6 +25,7 @@ const PATTERN_TEXTURES: Dictionary[StringName, Texture2D] = {
 @onready var _juice: JuiceComponent = $JuiceComponent
 
 var color_id: StringName = &""
+var _highlight_tween: Tween
 
 func _ready() -> void:
 	_hitbox.tapped.connect(_on_hitbox_tapped)
@@ -46,6 +51,21 @@ func play_correct_feedback() -> void:
 
 func play_incorrect_feedback() -> void:
 	_juice.play_shake()
+
+func set_highlighted(enabled: bool) -> void:
+	if _highlight_tween != null and _highlight_tween.is_valid():
+		_highlight_tween.kill()
+
+	_halo.visible = enabled
+	scale = Vector2.ONE
+
+	if not enabled:
+		return
+
+	_highlight_tween = create_tween()
+	_highlight_tween.set_loops()
+	_highlight_tween.tween_property(self, "scale", Vector2.ONE * HIGHLIGHT_BOUNCE_SCALE, HIGHLIGHT_CYCLE_SEC * 0.5)
+	_highlight_tween.tween_property(self, "scale", Vector2.ONE, HIGHLIGHT_CYCLE_SEC * 0.5)
 
 func _on_hitbox_tapped() -> void:
 	tapped.emit(self)

@@ -24,6 +24,10 @@ AudioManager="*res://core/autoloads/AudioManager.gd"
 MetricsLogger="*res://core/autoloads/MetricsLogger.gd"
 SceneDirector="*res://core/autoloads/SceneDirector.gd"
 
+[audio]
+
+buses/default_bus_layout="res://default_bus_layout.tres"
+
 [display]
 
 window/stretch/mode="canvas_items"

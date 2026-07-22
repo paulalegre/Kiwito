@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://shared/ui_elements/transitions/fade_transition.gd" id="1_script"]
+[ext_resource type="Resource" path="res://shared/global_assets/palette.tres" id="2_palette"]
 
 [node name="FadeTransition" type="CanvasLayer"]
 layer = 100
 script = ExtResource("1_script")
+palette = ExtResource("2_palette")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
