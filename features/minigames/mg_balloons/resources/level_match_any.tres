@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BalloonLevelConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://shared/contracts/BalloonLevelConfig.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+match_rule = 0
+target_color_id = &"red_coral"
+win_count = 5
+spawn_interval_sec = 1.5
+ascent_speed = 70.0

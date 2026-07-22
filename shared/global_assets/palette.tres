@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Palette" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://shared/global_assets/Palette.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+colors = {
+&"yellow_sol": Color(0.94902, 0.756863, 0.305882, 1),
+&"green_hoja": Color(0.372549, 0.713725, 0.352941, 1),
+&"red_coral": Color(0.886275, 0.341176, 0.298039, 1),
+&"blue_oceano": Color(0.141176, 0.360784, 0.619608, 1)
+}
+pattern_ids = {
+&"yellow_sol": &"stars",
+&"green_hoja": &"stripes",
+&"red_coral": &"dots",
+&"blue_oceano": &"zigzag"
+}

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://features/minigames/mg_balloons/mg_balloons.gd" id="1_script"]
+[ext_resource type="Resource" path="res://shared/global_assets/palette.tres" id="2_palette"]
+
+[node name="MgBalloons" type="Node2D"]
+script = ExtResource("1_script")
+palette = ExtResource("2_palette")
+
+[node name="SpawnTimer" type="Timer" parent="."]
