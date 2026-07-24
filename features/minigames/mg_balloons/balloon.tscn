@@ -1,47 +1,49 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene format=3 uid="uid://dq4gt6qxon73x"]
 
-[ext_resource type="Script" path="res://features/minigames/mg_balloons/balloon.gd" id="1_script"]
-[ext_resource type="Script" path="res://shared/components/hitbox_component.gd" id="2_hitbox"]
-[ext_resource type="Script" path="res://shared/components/ascent_component.gd" id="3_ascent"]
-[ext_resource type="Script" path="res://shared/components/juice_component.gd" id="4_juice"]
-[ext_resource type="Texture2D" path="res://design/minigames/mg_balloons/balloon_base.png" id="5_base"]
-[ext_resource type="Texture2D" path="res://design/minigames/mg_balloons/balloon_volume.png" id="6_volume"]
-[ext_resource type="Texture2D" path="res://design/minigames/mg_balloons/balloon_face.png" id="7_face"]
+[ext_resource type="Script" uid="uid://08h1on1ll3e8" path="res://features/minigames/mg_balloons/balloon.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://mtus0g2g7c32" path="res://shared/components/hitbox_component.gd" id="2_hitbox"]
+[ext_resource type="Script" uid="uid://c05up0nbljkt8" path="res://shared/components/ascent_component.gd" id="3_ascent"]
+[ext_resource type="Script" uid="uid://3kpla4cguko1" path="res://shared/components/juice_component.gd" id="4_juice"]
+[ext_resource type="Texture2D" uid="uid://bb8nj4tyb1oq4" path="res://design/minigames/mg_balloons/balloon_base.png" id="5_base"]
+[ext_resource type="Texture2D" uid="uid://cnikfsbstqn26" path="res://design/minigames/mg_balloons/balloon_volume.png" id="6_volume"]
+[ext_resource type="Texture2D" uid="uid://b1soglcrdcn0g" path="res://design/minigames/mg_balloons/balloon_face.png" id="7_face"]
 [ext_resource type="Resource" path="res://shared/global_assets/palette.tres" id="8_palette"]
-[ext_resource type="Script" path="res://features/minigames/mg_balloons/balloon_halo.gd" id="9_halo"]
+[ext_resource type="Script" uid="uid://dk66todlc5k4q" path="res://features/minigames/mg_balloons/balloon_halo.gd" id="9_halo"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hitbox"]
-size = Vector2(410.8, 530.4)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gbqww"]
+radius = 214.0
+height = 492.0
 
-[node name="Balloon" type="Node2D"]
+[node name="Balloon" type="Node2D" unique_id=1619389567]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_script")
 
-[node name="Halo" type="Node2D" parent="."]
+[node name="Halo" type="Node2D" parent="." unique_id=1233524282]
 visible = false
 script = ExtResource("9_halo")
 
-[node name="BodySprite" type="Sprite2D" parent="."]
+[node name="BodySprite" type="Sprite2D" parent="." unique_id=602493294]
 texture = ExtResource("5_base")
 
-[node name="VolumeSprite" type="Sprite2D" parent="."]
+[node name="VolumeSprite" type="Sprite2D" parent="." unique_id=1880596840]
 texture = ExtResource("6_volume")
 
-[node name="FaceSprite" type="Sprite2D" parent="."]
+[node name="FaceSprite" type="Sprite2D" parent="." unique_id=1442587437]
 texture = ExtResource("7_face")
 
-[node name="PatternSprite" type="Sprite2D" parent="."]
+[node name="PatternSprite" type="Sprite2D" parent="." unique_id=1038278770]
 visible = false
 modulate = Color(1, 1, 1, 0.2)
 
-[node name="HitboxComponent" type="Area2D" parent="."]
+[node name="HitboxComponent" type="Area2D" parent="." unique_id=1359326516]
 script = ExtResource("2_hitbox")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-shape = SubResource("RectangleShape2D_hitbox")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=2136243580]
+shape = SubResource("CapsuleShape2D_gbqww")
 
-[node name="AscentComponent" type="Node" parent="."]
+[node name="AscentComponent" type="Node" parent="." unique_id=1143420379]
 script = ExtResource("3_ascent")
 
-[node name="JuiceComponent" type="Node" parent="."]
+[node name="JuiceComponent" type="Node" parent="." unique_id=1805625283]
 script = ExtResource("4_juice")
 palette = ExtResource("8_palette")

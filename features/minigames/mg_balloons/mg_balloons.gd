@@ -9,6 +9,11 @@ const SPAWN_MARGIN_PX: float = 80.0
 const GOAL_BOX_MARGIN_PX: float = 160.0
 const DISTRACTOR_COLOR_ID: StringName = &"blue_oceano"
 
+## Caja conservadora que acota el hitbox del globo para fines de spawn, sin
+## depender de su Shape2D concreto (rectángulo hoy, cápsula planeada aparte).
+const BALLOON_CLEARANCE_SIZE: Vector2 = Vector2(220.0, 280.0)
+const MAX_SPAWN_ATTEMPTS: int = 8
+
 ## Umbrales de frustración (GDD_MVP.md §3): 3 toques incorrectos en <1.5s, o
 ## 4s sin ningún toque correcto, escalan la ayuda sin nunca bloquear el input.
 const FRUSTRATION_TAP_WINDOW_SEC: float = 1.5
@@ -65,6 +70,22 @@ func start(config: LevelConfig) -> void:
 	_spawn_balloon()
 
 func _spawn_balloon() -> void:
+	var viewport_size: Vector2 = get_viewport_rect().size
+	var spawn_y: float = viewport_size.y + BALLOON_CLEARANCE_SIZE.y / 2.0 + SPAWN_MARGIN_PX
+	var active_footprints: Array[Rect2] = _active_footprints()
+
+	var spawn_position: Vector2 = Vector2.ZERO
+	var found_position: bool = false
+	for attempt: int in range(MAX_SPAWN_ATTEMPTS):
+		var candidate: Vector2 = Vector2(randf_range(SPAWN_MARGIN_PX, viewport_size.x - SPAWN_MARGIN_PX), spawn_y)
+		if SpawnPlacement.is_position_clear(_footprint_at(candidate), active_footprints):
+			spawn_position = candidate
+			found_position = true
+			break
+
+	if not found_position:
+		return
+
 	var color_id: StringName = _config.target_color_id
 	if _config.match_rule == LevelConfig.MatchRule.MATCH_COLOR and randf() < 0.5:
 		color_id = DISTRACTOR_COLOR_ID
@@ -72,18 +93,23 @@ func _spawn_balloon() -> void:
 	var balloon: Balloon = BALLOON_SCENE.instantiate()
 	add_child(balloon)
 	balloon.setup(color_id, palette, _config.ascent_speed)
-
-	var viewport_size: Vector2 = get_viewport_rect().size
-	balloon.position = Vector2(
-		randf_range(SPAWN_MARGIN_PX, viewport_size.x - SPAWN_MARGIN_PX),
-		viewport_size.y + SPAWN_MARGIN_PX
-	)
+	balloon.position = spawn_position
 
 	balloon.tapped.connect(_on_balloon_tapped)
 	_active_balloons.append(balloon)
 
 	if _frustration_level >= 2 and color_id == _config.target_color_id:
 		balloon.set_highlighted(true)
+
+func _active_footprints() -> Array[Rect2]:
+	var footprints: Array[Rect2] = []
+	for active_balloon: Balloon in _active_balloons:
+		if is_instance_valid(active_balloon):
+			footprints.append(_footprint_at(active_balloon.position))
+	return footprints
+
+func _footprint_at(center: Vector2) -> Rect2:
+	return Rect2(center - BALLOON_CLEARANCE_SIZE / 2.0, BALLOON_CLEARANCE_SIZE)
 
 func _on_balloon_tapped(balloon: Balloon) -> void:
 	if not is_instance_valid(balloon):

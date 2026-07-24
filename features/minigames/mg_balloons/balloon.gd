@@ -26,8 +26,10 @@ const HIGHLIGHT_CYCLE_SEC: float = 1.5
 
 var color_id: StringName = &""
 var _highlight_tween: Tween
+var _base_scale: Vector2 = Vector2.ONE
 
 func _ready() -> void:
+	_base_scale = scale
 	_hitbox.tapped.connect(_on_hitbox_tapped)
 
 func setup(new_color_id: StringName, palette: Palette, ascent_speed: float) -> void:
@@ -57,15 +59,15 @@ func set_highlighted(enabled: bool) -> void:
 		_highlight_tween.kill()
 
 	_halo.visible = enabled
-	scale = Vector2.ONE
+	scale = _base_scale
 
 	if not enabled:
 		return
 
 	_highlight_tween = create_tween()
 	_highlight_tween.set_loops()
-	_highlight_tween.tween_property(self, "scale", Vector2.ONE * HIGHLIGHT_BOUNCE_SCALE, HIGHLIGHT_CYCLE_SEC * 0.5)
-	_highlight_tween.tween_property(self, "scale", Vector2.ONE, HIGHLIGHT_CYCLE_SEC * 0.5)
+	_highlight_tween.tween_property(self, "scale", _base_scale * HIGHLIGHT_BOUNCE_SCALE, HIGHLIGHT_CYCLE_SEC * 0.5)
+	_highlight_tween.tween_property(self, "scale", _base_scale, HIGHLIGHT_CYCLE_SEC * 0.5)
 
 func _on_hitbox_tapped() -> void:
 	tapped.emit(self)
