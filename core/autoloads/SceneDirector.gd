@@ -39,6 +39,7 @@ func launch_minigame(scene: PackedScene, config: LevelConfig) -> void:
 
 func _on_minigame_session_finished(result: MinigameResult) -> void:
 	ProgressionManager.record_session_result(result)
+	MetricsLogger.record_session(result)
 	goto_hub()
 
 func _swap_scene(new_scene: Node) -> void:
