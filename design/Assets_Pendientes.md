@@ -21,22 +21,32 @@ elemento, vértices redondeados, color siempre resuelto desde `shared/global_ass
 Ni `root.tscn` ni las escenas del Hub/minijuego definen un fondo o `clear_color`; ambas corren
 sobre el gris por defecto del motor. Es el gap más grande y el primero a resolver.
 
-- [ ] **Fondo del Hub y modales** — Crema `#FBF3E4` como base. Opcional: 2–4 capas de siluetas
+- [x] **Fondo del Hub** — Crema `#FBF3E4` como base. Opcional: 2–4 capas de siluetas
       planas por tono para profundidad (§3.5), sin textura interna en ninguna capa.
-      → `design/hub_main/hub_bg.png` (o `hub_bg_layer_1.png` … `hub_bg_layer_4.png` si usas capas)
+      → `design/hub_main/hub_bg.png` (1920×1080). Implementado como `Sprite2D` sobre una base
+      `ColorRect`-equivalente (`PaletteBackgroundRect`, `shared/components/`) tintada con
+      `cream_fade` de `palette.tres`, para cubrir sin gris por defecto cualquier aspect ratio de
+      tablet bajo `stretch/aspect = expand` (Core_Architecture.md §0). Ver `wire-hub-main-art-assets`.
+- [ ] **Fondo de modales** (Álbum de Stickers) — mismo tratamiento Crema, pendiente; no incluido en
+      `wire-hub-main-art-assets` (fuera de su alcance).
 - [ ] **Cielo/fondo de Explotaglobos** — Menta `#CFE7DA`. Único lugar del proyecto donde se
       permite degradado (capa de cielo lejano, §3.2), si decides usarlo.
       → `design/minigames/mg_balloons/mg_balloons_bg_sky.png`
 
 ## 1. Hub — nodos interactivos (dominio `hub_main`)
 
-Reemplazan `PlaceholderCircle` en `caja_de_globos.tscn` / `libro_magico.tscn`.
+Reemplazan `PlaceholderCircle` en `caja_de_globos.tscn` / `libro_magico.tscn`. Dirección final
+confirmada 2026-07-31: **botón-icono circular** (glifo de play / glifo de libro sobre un círculo
+tintado), reemplazando el lenguaje original de silueta literal de caja/cofre y libro.
 
-- [ ] **Caja de Globos** — forma de caja/cofre, 320+ px visibles (§5.2), esquinas redondeadas,
-      máx. 2 tonos de volumen.
-      → `design/hub_main/hub_balloon_box.png`
-- [ ] **Libro Mágico** — forma de libro, mismo tamaño (320+ px).
-      → `design/hub_main/hub_magic_book.png`
+- [x] **Caja de Globos** — `design/hub_main/hub_balloon_box.png` (332×332 px). Por debajo del ideal
+      de §5.2 (320+ *lógicos* con margen de entrega 1.5×; a escala nativa 1× apenas alcanza el
+      mínimo, sin colchón de alta densidad) — **aceptado para MVP**, revisar en el próximo pase de
+      arte de una versión estable.
+- [x] **Libro Mágico** — `design/hub_main/hub_magic_book.png` (170×210 px). No alcanza el mínimo de
+      320px de §5.2 bajo ninguna interpretación, y es ~1.6× más chico que Caja de Globos (rompe el
+      "mismo tamaño" pedido originalmente aquí) — **aceptado para MVP** por la misma razón; es el
+      candidato más urgente para el próximo re-export.
 
 ## 2. UI de pausa — iconos (dominio `ui`)
 

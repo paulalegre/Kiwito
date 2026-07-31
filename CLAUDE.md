@@ -2,6 +2,14 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Idioma
+
+Responder siempre en español en este proyecto — texto de conversación, resúmenes, mensajes de commit y
+cualquier documento generado (propuestas de OpenSpec, diseños, etc.), salvo que el usuario pida
+explícitamente lo contrario. Identificadores, nombres de archivo, código y términos técnicos en inglés
+(los ya establecidos en el proyecto) se mantienen como están — esta regla es sobre el idioma de
+comunicación, no sobre traducir el código o la arquitectura.
+
 ## Project
 
 Moss Guardian (`MossGame`) — a Godot 4.x 2D educational minigame platform for early childhood (ages 3-8),
