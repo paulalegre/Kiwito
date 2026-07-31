@@ -18,6 +18,7 @@ script = ExtResource("2_icon")
 palette = ExtResource("3_palette")
 color_id = &"warm_grey_tint"
 icon_radius = 40.0
+glyph = 1
 
 [node name="Overlay" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -46,9 +47,11 @@ script = ExtResource("2_icon")
 palette = ExtResource("3_palette")
 color_id = &"green_hoja"
 icon_radius = 48.0
+glyph = 2
 
 [node name="SalirButton" type="Control" parent="Overlay/CenterContainer/HBoxContainer"]
 script = ExtResource("2_icon")
 palette = ExtResource("3_palette")
 color_id = &"blue_oceano"
 icon_radius = 48.0
+glyph = 3

@@ -9,9 +9,7 @@ since Change #4: a Home-icon button and zero-text pause overlay (Continuar / Sal
 while touching this exact chrome code: the fade transition hardcodes a fade-to-black instead of the
 `Direccion_de_Arte.md` §7-mandated fade-to-cream, an anxiogenic full-black cut for a young child that this
 capability corrects by reading `cream_fade` from `palette.tres`.
-
 ## Requirements
-
 ### Requirement: Home button appears only during an active minigame session
 `SceneDirector` SHALL show its Home/pause button only while `_active_minigame` is set, and hide it while the
 Hub is showing.
@@ -66,3 +64,25 @@ even while `get_tree().paused` is `true`.
 #### Scenario: Fade uses the palette's cream color
 - **WHEN** a scene transition's fade is inspected mid-transition
 - **THEN** its color matches `palette.tres`'s `cream_fade` entry, not `Color(0, 0, 0, ...)`
+
+### Requirement: Pause-menu affordances render a distinct glyph
+Each of the three pause-menu affordances (the Home/pause button owned by `SceneDirector`, and the
+"Continuar"/"Salir al Hub" buttons on the pause overlay) SHALL render a flat glyph layered on top of its
+base color circle — pause, play, and home respectively — via `TappableIcon`'s `glyph` export, so the three
+affordances are distinguishable by shape, not only by color or screen position.
+
+#### Scenario: Home button shows a pause glyph
+- **WHEN** the Home button is visible during an active minigame session
+- **THEN** it draws a pause glyph (two vertical bars) on top of its base circle, colored from
+  `palette.tres`'s `cream_fade` entry
+
+#### Scenario: Continuar shows a play glyph
+- **WHEN** the pause overlay is visible
+- **THEN** the "Continuar" affordance draws a play glyph (a triangle) on top of its base circle, colored
+  from `palette.tres`'s `cream_fade` entry
+
+#### Scenario: Salir al Hub shows a home glyph
+- **WHEN** the pause overlay is visible
+- **THEN** the "Salir al Hub" affordance draws a home glyph (a rounded roof over a rounded base, no sharp
+  90° corners) on top of its base circle, colored from `palette.tres`'s `cream_fade` entry
+
