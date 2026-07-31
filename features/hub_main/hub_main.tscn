@@ -1,27 +1,28 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene format=3 uid="uid://dx331webdq868"]
 
-[ext_resource type="Script" path="res://features/hub_main/hub_main.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dr7sdcoh6kcs" path="res://features/hub_main/hub_main.gd" id="1_script"]
 [ext_resource type="PackedScene" path="res://features/hub_main/caja_de_globos.tscn" id="2_caja"]
 [ext_resource type="PackedScene" path="res://features/hub_main/libro_magico.tscn" id="3_libro"]
-[ext_resource type="Script" path="res://shared/components/palette_background_rect.gd" id="4_bgscript"]
+[ext_resource type="Script" uid="uid://beald34rgv66e" path="res://shared/components/palette_background_rect.gd" id="4_bgscript"]
 [ext_resource type="Resource" path="res://shared/global_assets/palette.tres" id="5_palette"]
-[ext_resource type="Texture2D" path="res://design/hub_main/hub_bg.png" id="6_bgtex"]
-[ext_resource type="Script" path="res://shared/components/cover_sprite.gd" id="7_cover"]
+[ext_resource type="Texture2D" uid="uid://dscxu7h0sp3gi" path="res://design/hub_main/hub_bg.png" id="6_bgtex"]
+[ext_resource type="Script" uid="uid://bgf3t8fqq8f5m" path="res://shared/components/cover_sprite.gd" id="7_cover"]
 
-[node name="HubMain" type="Node2D"]
+[node name="HubMain" type="Node2D" unique_id=314477002]
 script = ExtResource("1_script")
 
-[node name="BackgroundBase" type="Node2D" parent="."]
+[node name="BackgroundBase" type="Node2D" parent="." unique_id=432956896]
 script = ExtResource("4_bgscript")
 palette = ExtResource("5_palette")
 color_id = &"cream_fade"
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="." unique_id=1193718128]
+position = Vector2(960, 540)
 texture = ExtResource("6_bgtex")
 script = ExtResource("7_cover")
 
-[node name="CajaDeGlobos" parent="." instance=ExtResource("2_caja")]
-position = Vector2(400, 500)
+[node name="CajaDeGlobos" parent="." unique_id=28248829 instance=ExtResource("2_caja")]
+position = Vector2(960, 540)
 
-[node name="LibroMagico" parent="." instance=ExtResource("3_libro")]
-position = Vector2(900, 500)
+[node name="LibroMagico" parent="." unique_id=38008971 instance=ExtResource("3_libro")]
+position = Vector2(137, 138)
