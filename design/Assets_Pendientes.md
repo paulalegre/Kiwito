@@ -29,9 +29,10 @@ sobre el gris por defecto del motor. Es el gap más grande y el primero a resolv
       tablet bajo `stretch/aspect = expand` (Core_Architecture.md §0). Ver `wire-hub-main-art-assets`.
 - [ ] **Fondo de modales** (Álbum de Stickers) — mismo tratamiento Crema, pendiente; no incluido en
       `wire-hub-main-art-assets` (fuera de su alcance).
-- [ ] **Cielo/fondo de Explotaglobos** — Menta `#CFE7DA`. Único lugar del proyecto donde se
-      permite degradado (capa de cielo lejano, §3.2), si decides usarlo.
-      → `design/minigames/mg_balloons/mg_balloons_bg_sky.png`
+- [x] **Cielo/fondo de Explotaglobos** — Menta `#CFE7DA`. → `design/minigames/mg_balloons/balloon_bg.png`
+      (1920×1080). Implementado con el mismo patrón que el fondo del Hub: `Sprite2D` + `CoverSprite`
+      sobre una base `PaletteBackgroundRect` tintada con la nueva entrada `mint_ambiente` de
+      `palette.tres`. Ver `wire-mg-balloons-background`.
 
 ## 1. Hub — nodos interactivos (dominio `hub_main`)
 
