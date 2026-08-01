@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://features/hub_main/caja_de_globos.gd" id="1_script"]
 [ext_resource type="Script" path="res://shared/components/hitbox_component.gd" id="3_hitbox"]
 [ext_resource type="Texture2D" path="res://design/hub_main/hub_balloon_box.png" id="4_art"]
+[ext_resource type="Script" path="res://shared/components/idle_bounce_component.gd" id="5_idle_bounce"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hitbox"]
 radius = 215.8
@@ -18,3 +19,6 @@ script = ExtResource("3_hitbox")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_hitbox")
+
+[node name="IdleBounceComponent" type="Node" parent="."]
+script = ExtResource("5_idle_bounce")
