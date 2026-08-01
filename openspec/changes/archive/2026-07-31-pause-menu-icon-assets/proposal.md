@@ -14,12 +14,12 @@ mal. Propuesta_MVP.md §8, Fase 5 ("Audio y pulido sensorial"), la misma fase de
   Texture2D`, renderizado con `draw_texture_rect(glyph_texture, rect, false, glyph_color)` — reemplazo
   limpio del código de dibujo anterior, no una rama condicional conviviendo con la nueva (mismo patrón que
   el proyecto ya siguió con `PlaceholderCircle.gd` al recibir el arte real del Hub).
-- `pause_overlay.tscn` referencia las tres texturas finales por ruta (`design/ui/ui_icon_home.png`,
+- `pause_overlay.tscn` referencia las tres texturas finales por ruta (`design/ui/ui_icon_pause.png`,
   `ui_icon_continue.png`, `ui_icon_exit.png`) en vez del `glyph` enum.
-- `design/Assets_Pendientes.md` §2 gana una nota aclaratoria: el nombre `ui_icon_home.png` viene del
-  identificador de código del botón (`_home_button` de `SceneDirector`), no implica un pictograma de casa —
-  ese archivo lleva el glifo de **pausa**; el pictograma de **casa** va en `ui_icon_exit.png` (Salir al
-  Hub), y el de **play** en `ui_icon_continue.png`.
+- `design/Assets_Pendientes.md` §2 renombra su entrada del botón Casa de `ui_icon_home.png` a
+  `ui_icon_pause.png`: el nombre pasa a describir el pictograma real (glifo de **pausa**), no el
+  identificador de código del botón (`_home_button` de `SceneDirector`) que lo consume. El pictograma de
+  **casa** va en `ui_icon_exit.png` (Salir al Hub), y el de **play** en `ui_icon_continue.png`.
 - Requisito de entrega explícito para el diseñador: los tres PNG deben ser máscara alfa (silueta blanca
   opaca sobre transparente, sin color horneado), para poder seguir tiñéndose en runtime con `cream_fade` vía
   `modulate` — igual regla de "color siempre desde `palette.tres`" que ya rige el resto del proyecto.

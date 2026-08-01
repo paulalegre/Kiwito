@@ -54,11 +54,16 @@ tintado), reemplazando el lenguaje original de silueta literal de caja/cofre y l
 Reemplazan los círculos lisos de `tappable_icon.gd` (`pause_overlay.tscn`). Sin pictograma hoy
 el significado depende solo de color/posición, lo cual roza el invariante de cero-texto.
 
-- [ ] **Botón Casa** — 140 px visible / 182 px hitbox (§5.2).
-      → `design/ui/ui_icon_home.png`
-- [ ] **Continuar** — ~96 px visible (icon_radius 48 en la escena actual).
+Entrega como máscara alfa: silueta blanca opaca sobre fondo transparente, sin color horneado —
+se tiñe en runtime con `cream_fade` de `palette.tres` vía `modulate` (mismo mecanismo que
+`Balloon.setup()` con `balloon_base.png`/`balloon_volume.png`).
+
+- [x] **Botón Casa** — 140 px visible / 182 px hitbox (§5.2). El nombre del archivo describe el
+      pictograma (glifo de pausa), no el identificador de código del botón (`_home_button`).
+      → `design/ui/ui_icon_pause.png`
+- [x] **Continuar** — ~96 px visible (icon_radius 48 en la escena actual).
       → `design/ui/ui_icon_continue.png`
-- [ ] **Salir al Hub** — mismo tamaño que Continuar.
+- [x] **Salir al Hub** — mismo tamaño que Continuar.
       → `design/ui/ui_icon_exit.png`
 
 ## 3. Álbum de stickers — 3 accesorios (dominio `mg_balloons`)

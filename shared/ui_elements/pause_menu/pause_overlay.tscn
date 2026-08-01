@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://shared/ui_elements/pause_menu/pause_overlay.gd" id="1_script"]
 [ext_resource type="Script" path="res://shared/ui_elements/pause_menu/tappable_icon.gd" id="2_icon"]
 [ext_resource type="Resource" path="res://shared/global_assets/palette.tres" id="3_palette"]
+[ext_resource type="Texture2D" path="res://design/ui/ui_icon_pause.png" id="4_glyph_pause"]
+[ext_resource type="Texture2D" path="res://design/ui/ui_icon_continue.png" id="5_glyph_continue"]
+[ext_resource type="Texture2D" path="res://design/ui/ui_icon_exit.png" id="6_glyph_exit"]
 
 [node name="PauseOverlay" type="CanvasLayer"]
 layer = 50
@@ -18,7 +21,7 @@ script = ExtResource("2_icon")
 palette = ExtResource("3_palette")
 color_id = &"warm_grey_tint"
 icon_radius = 40.0
-glyph = 1
+glyph_texture = ExtResource("4_glyph_pause")
 
 [node name="Overlay" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -47,11 +50,11 @@ script = ExtResource("2_icon")
 palette = ExtResource("3_palette")
 color_id = &"green_hoja"
 icon_radius = 48.0
-glyph = 2
+glyph_texture = ExtResource("5_glyph_continue")
 
 [node name="SalirButton" type="Control" parent="Overlay/CenterContainer/HBoxContainer"]
 script = ExtResource("2_icon")
 palette = ExtResource("3_palette")
 color_id = &"blue_oceano"
 icon_radius = 48.0
-glyph = 3
+glyph_texture = ExtResource("6_glyph_exit")
