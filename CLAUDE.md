@@ -17,12 +17,17 @@ targeting tablets (Android/iPadOS), validated locally on PC. The product is the 
 ("cartridge" architecture), not any single minigame — the first cartridge is a color-discrimination
 balloon-popping game ("Explotaglobos").
 
-**Current state: early bootstrap.** `scripts/main.gd` and `scripts/globo.gd` are a rough prototype
-(untyped-by-convention, flat `scenes/`/`scripts/` layout) that predates the architecture below. There is
-no `core/`/`shared/`/`features/` split yet, no autoloads, no GUT tests, and `project.godot` currently uses
-`renderer/rendering_method="mobile"` with the `d3d12` Windows driver — not yet the `GL Compatibility`
-renderer mandated by the architecture doc. Do not assume the docs describe already-built code; check the
-actual files before relying on either.
+**Current state: architecture built out, MVP-ish.** The early `scripts/main.gd`/`scripts/globo.gd`
+prototype and its flat `scenes/`/`scripts/` layout are gone. The `core/`/`shared/`/`features/` split from
+`Core_Architecture.md` is in place: six autoloads are wired in `project.godot`
+(`SaveManager` → `SettingsManager`/`ProgressionManager` → `AudioManager`/`MetricsLogger`/`SceneDirector`),
+`renderer/rendering_method` is `gl_compatibility`, and `tests/unit/` has GUT coverage for
+`SaveManager`/`ProgressionManager`/`MetricsLogger`/`spawn_placement`. `features/hub_main/` and
+`features/minigames/mg_balloons/` are implemented cartridges, not stubs. Work is tracked via OpenSpec
+(`openspec/changes/`, `openspec/specs/`) — check `openspec/specs/*/spec.md` for the current normative
+behavior of a subsystem before re-deriving it from docs/ alone, and see `openspec/changes/archive/` for
+history. Still verify against the actual files rather than assuming completeness — e.g. several art assets
+in `design/Assets_Pendientes.md` are still unchecked (sticker accessories, modal background).
 
 ## Source of truth: `docs/`
 
@@ -128,7 +133,9 @@ durations). Feedback on any valid touch must land in under 100ms.
   in grayscale, and each carries a redundant non-chromatic pattern (stars/stripes/dots/zigzag) — color is
   never the only channel for a rule. A color without an assigned pattern is a data error.
   See `Direccion_de_Arte.md` §2.2 for the exact color/pattern table.
-- `design/globo.png` is a stale placeholder (has outline/gradient/specular highlight) marked for rework;
-  don't treat its current visual finish as the style target — see `Direccion_de_Arte.md` §12.
+- The real balloon art is the layered set in `design/minigames/mg_balloons/`
+  (`balloon_base.png`/`balloon_volume.png`/`balloon_face.png` + pattern overlays), tinted at runtime from
+  `palette.tres`. The old single-file `design/globo.png` placeholder (outline/gradient/specular highlight,
+  predating the current style) was an orphaned prototype asset and has been removed from the repo.
 - Facial "prefab" (dot eyes in ink `#3B3028`, no sclera/highlight, simple mouth arc) is the default for all
   characters/stickers; deviating requires a documented reason (§3.3).
